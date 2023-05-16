@@ -1,34 +1,31 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { ContactsList } from './ContactsList/ContactsList';
 import { Form } from './Form/Form';
+import { getContactsThunk } from 'redux/thunks';
 import { FilterContacts } from './FilterContacts/FilterContacts';
-
 import css from '../components/App.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { getFilter } from 'redux/filterSlice';
-import { removeContact } from 'redux/contactsSlice';
 
 export function App() {
-  const filter = useSelector(state => state.contacts.filters);
   const dispatch = useDispatch();
+  const { items, isLoading, error } = useSelector(
+    state => state.contacts.contacts
+  );
 
-  const deleteContact = () => {
-    dispatch(removeContact());
-  };
-
-  const changeFilter = e => {
-    dispatch(getFilter(e.currentTarget.value));
-  };
+  useEffect(() => {
+    dispatch(getContactsThunk());
+  }, [dispatch]);
 
   return (
     <>
       <h1 className={css.title}>Phonebook</h1>
       <Form />
       <h2 className={css.title__contacts}>Contacts</h2>
-      <FilterContacts value={filter} onChange={changeFilter} />
-      <ContactsList
-        // contacts={filteredContacts}
-        onDeleteContact={deleteContact}
-      />
+      <FilterContacts />
+
+      {isLoading && <h3>Loading...</h3>}
+      {error && <h3>{error}</h3>}
+      {items.length > 0 ? <ContactsList /> : <h3>No contacts</h3>}
     </>
   );
 }
