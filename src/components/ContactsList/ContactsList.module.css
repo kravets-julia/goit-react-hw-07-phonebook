@@ -4,12 +4,16 @@
 
 ul {
     padding: 0;
+
 }
 
 .item {
     display: flex;
     gap: 25px;
     align-items: center;
+    justify-content: space-between;
+    /* justify-content: center; */
+
 }
 
 .btn {
@@ -31,4 +35,8 @@ ul {
 
 .contactsList__box {
     padding: 10px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
 }

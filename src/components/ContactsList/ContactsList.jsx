@@ -13,7 +13,7 @@ export const ContactsList = () => {
       <ul>
         {contacts.map(contact => (
           <li key={contact.id} className={css.item}>
-            <ContactsListitem name={contact.name} number={contact.number} />
+            <ContactsListitem name={contact.name} number={contact.phone} />
             <button
               onClick={() => dispatch(deleteContactsThunk(contact.id))}
               className={css.btn}

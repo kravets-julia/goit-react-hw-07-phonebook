@@ -17,15 +17,17 @@ export function App() {
   }, [dispatch]);
 
   return (
-    <>
-      <h1 className={css.title}>Phonebook</h1>
-      <Form />
+    <div className={css.box}>
+      <div className={css.box__form}>
+        <h1 className={css.title}>Phonebook</h1>
+        <Form />
+      </div>
       <h2 className={css.title__contacts}>Contacts</h2>
       <FilterContacts />
 
       {isLoading && <h3>Loading...</h3>}
       {error && <h3>{error}</h3>}
       {items.length > 0 ? <ContactsList /> : <h3>No contacts</h3>}
-    </>
+    </div>
   );
 }
